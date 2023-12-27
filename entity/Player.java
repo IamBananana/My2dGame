@@ -1,16 +1,13 @@
 package entity;
 
 import main.KeyHandler;
-
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
-
 import main.GamePanel;
 
 public class Player extends Entity{
@@ -53,6 +50,7 @@ public class Player extends Entity{
         }
     }
     public void update() {
+        //this ensures that the sprite is not using its walking animation while standing still
         if (keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true) {
             if (keyH.upPressed == true) {
                 direction = "up";
