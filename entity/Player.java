@@ -20,12 +20,14 @@ public class Player extends Entity{
         setDefaultValues();
         getPlayerImage();
     }
+    
     public void setDefaultValues() {
         x = 100;
         y = 100;
         speed = 4;
         direction = "down";
     }
+    
     File f1 = new File("src/res/player/boy_up_1.png");
     File f2 = new File("src/res/player/boy_up_2.png");
     File f3 = new File("src/res/player/boy_down_1.png");
@@ -49,6 +51,7 @@ public class Player extends Entity{
             e.printStackTrace();
         }
     }
+    
     public void update() {
         //this ensures that the sprite is not using its walking animation while standing still
         if (keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true) {
@@ -75,9 +78,9 @@ public class Player extends Entity{
                 spriteCounter = 0;
             }
         }
-
-
+        
     }
+    
     public void draw(Graphics2D g2) {
         //g2.setColor(Color.white);
         //draw character for now
