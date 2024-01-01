@@ -5,9 +5,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
-
 import javax.swing.JPanel;
-
 import entity.Player;
 import tile.TileManager;
 
@@ -81,10 +79,12 @@ public class GamePanel extends JPanel implements Runnable{
             } */
         }
     }
+    
     public void update() {
         //update the player from the class player
         player.update();
     }
+    
     public void paintComponent(Graphics g) {
         Toolkit.getDefaultToolkit().sync();
         super.paintComponent(g);
