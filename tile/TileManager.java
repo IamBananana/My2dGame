@@ -5,9 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Scanner;
-
 import javax.imageio.ImageIO;
-
 import main.GamePanel;
 
 public class TileManager {
@@ -22,6 +20,7 @@ public class TileManager {
         getTileImage();
         loadMap("src/res/maps/map01.txt");
     }
+    
     public void getTileImage() {
         try {
             File file = new File("src/res/tiles/grass.png");
@@ -43,6 +42,7 @@ public class TileManager {
             e.printStackTrace();
         }
     }
+    
     public void loadMap(String path) {
         try {
             Scanner scanner = new Scanner(new File(path));
@@ -64,6 +64,7 @@ public class TileManager {
             // TODO: handle exception
         }
     }
+    
     public void draw(Graphics2D g2) {
         int col = 0;
         int row = 0;
