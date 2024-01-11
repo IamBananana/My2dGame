@@ -1,9 +1,7 @@
 package entity;
 
 import main.KeyHandler;
-import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -14,20 +12,25 @@ public class Player extends Entity{
     GamePanel gp;
     KeyHandler keyH;
 
+    public final int SCREEN_X;
+    public final int SCREEN_Y;
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
         this.keyH = keyH;
+        
+        //Screen size is halfway of the screen width and height (middle)
+        SCREEN_X = gp.SCREEN_WIDTH/2 - (gp.TILE_SIZE/2);
+        SCREEN_Y = gp.SCREEN_HEIGHT/2 - (gp.TILE_SIZE/2);
+
         setDefaultValues();
         getPlayerImage();
     }
-    
     public void setDefaultValues() {
-        x = 100;
-        y = 100;
+        worldX = gp.TILE_SIZE * 23;
+        worldY = gp.TILE_SIZE * 21;
         speed = 4;
         direction = "down";
     }
-    
     File f1 = new File("src/res/player/boy_up_1.png");
     File f2 = new File("src/res/player/boy_up_2.png");
     File f3 = new File("src/res/player/boy_down_1.png");
@@ -51,22 +54,20 @@ public class Player extends Entity{
             e.printStackTrace();
         }
     }
-    
     public void update() {
-        //this ensures that the sprite is not using its walking animation while standing still
         if (keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true) {
             if (keyH.upPressed == true) {
                 direction = "up";
-                y -= speed;
+                worldY -= speed;
             } else if (keyH.downPressed == true) {
                 direction = "down";
-                y += speed;
+                worldY += speed;
             } else if (keyH.leftPressed == true) {
                 direction = "left";
-                x -= speed;
+                worldX -= speed;
             } else if (keyH.rightPressed == true) {
                 direction = "right";
-                x += speed;
+                worldX += speed;
             }
             spriteCounter++;
             if (spriteCounter > 12) {
@@ -78,9 +79,9 @@ public class Player extends Entity{
                 spriteCounter = 0;
             }
         }
-        
+
+
     }
-    
     public void draw(Graphics2D g2) {
         //g2.setColor(Color.white);
         //draw character for now
@@ -123,6 +124,6 @@ public class Player extends Entity{
             break;
         }
         //draw image at x y with same width and height, image observer is null
-        g2.drawImage(image, x, y, gp.TILE_SIZE, gp.TILE_SIZE, null);
+        g2.drawImage(image, SCREEN_X, SCREEN_Y, gp.TILE_SIZE, gp.TILE_SIZE, null);
     }
 }
