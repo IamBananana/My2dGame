@@ -5,7 +5,9 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
+
 import javax.swing.JPanel;
+
 import entity.Player;
 import tile.TileManager;
 
@@ -14,19 +16,27 @@ public class GamePanel extends JPanel implements Runnable{
     final int ORIGINAL_TILE_SIZE = 16; //16x16 tile
     final int SCALE = 3;
     public final int TILE_SIZE = ORIGINAL_TILE_SIZE * SCALE; //48x48 tile
+
     //Achieves a 4 to 3 ratio
     public final int MAX_SCREEN_COL = 16;
     public final int MAX_SCREEN_ROW = 12;
     public final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COL; // 768 pixels
     public final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROW; // 576 pixels
-    final int FPS = 60;
 
+    //WORLD SETTINGS
+    public final int MAX_WORLD_COL = 50;
+    public final int MAX_WORLD_ROW = 50;
+    public final int WORLD_WIDTH = TILE_SIZE * MAX_WORLD_COL;
+    public final int WORLD_HEIGHT = TILE_SIZE * MAX_WORLD_ROW;
+
+    //FPS
+    final int FPS = 60;
     
     //You need Thread for a game clock so that the program does not stop and wait for inputs but constantly runs
     Thread gameThread;
     KeyHandler keyH = new KeyHandler();
-    Player player = new Player(this, keyH);
     TileManager tileM = new TileManager(this);
+    public Player player = new Player(this, keyH);
 
     public GamePanel() {
         //Set the size of this class (JPanel)
@@ -46,7 +56,7 @@ public class GamePanel extends JPanel implements Runnable{
         gameThread.start();
     }
 
-    //Override run method is needed when Thread is started. Thread automatically calls upon a run();
+    // Override run method is needed when Thread is started. Thread automatically calls upon a run();
     @Override
     public void run() {
         double drawInterval = 1000000000/FPS; //0.016666... seconds
@@ -79,12 +89,10 @@ public class GamePanel extends JPanel implements Runnable{
             } */
         }
     }
-    
     public void update() {
         //update the player from the class player
         player.update();
     }
-    
     public void paintComponent(Graphics g) {
         Toolkit.getDefaultToolkit().sync();
         super.paintComponent(g);
